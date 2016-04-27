@@ -5,16 +5,16 @@ echo
 kubectl create -f pods/data-redis-master.yaml
 
 # Create a service to track the servers
-kubectl create -f svcs/data-redis-server.yaml
+kubectl create -f svcs/data/data-redis-server.yaml
 
 # Create a service to track the sentinels
-kubectl create -f svcs/data-redis-sentinel.yaml
+kubectl create -f svcs/data/data-redis-sentinel.yaml
 
 # Create a replication controller for redis servers
-kubectl create -f rcs/data-redis-server.yaml
+kubectl create -f rcs/data/data-redis-server.yaml
 
 # Create a replication controller for redis sentinels
-kubectl create -f rcs/data-redis-sentinel.yaml
+kubectl create -f rcs/data/data-redis-sentinel.yaml
 
 echo
 echo "Waiting a bit for all resources to be ready..."

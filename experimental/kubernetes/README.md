@@ -67,7 +67,7 @@ Now point your browser at [localhost:9000](http://localhost:9000), and you're al
 ## What Just Happened?
 
 The scripts created a namespace `spinnaker`, and deployed a `data` application
-containing Redis and Cassandra, and a `spkr` application, containing all of the
+containing Redis and Cassandra, and a `spin` application, containing all of the
 Spinnaker components. All the yaml files in `./config/` were placed into a
 secret called `spinnaker-config`, and your kubeconfig was placed into a secret
 called `kube-config`. These were mounted at `/opt/spinnaker/config/` and
@@ -99,5 +99,5 @@ If you just want to delete the Spinnaker components, but leave the persistence
 mechanisms (Redis & Cassandra), run
 
 ```
-$ bash scripts/cleanup-spinnaker.sh # This deletes everything with application name spkr
+$ bash scripts/cleanup-spinnaker.sh # This deletes everything with application name spin
 ```

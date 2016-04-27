@@ -1,3 +1,4 @@
+
 # This file is intended to serve as a master configuration for a Spinnaker deployment.
 # Customizations to the deployment should be made in another file named
 # "spinnaker-local.yml". The distribution has a prototype called
@@ -21,7 +22,7 @@ services:
     primaryAccountName: service-default-primaryAccountName-not-defined
 
   clouddriver:
-    host: spin-clouddriver.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 7002
     baseUrl: ${services.default.protocol}://${services.clouddriver.host}:${services.clouddriver.port}
     # Controls whether UserDataProviders are used to populate user data of new server groups.
@@ -33,7 +34,7 @@ services:
 
   echo:
     enabled: true
-    host: spin-echo.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8089
     baseUrl: ${services.default.protocol}://${services.echo.host}:${services.echo.port}
     cron:
@@ -59,22 +60,22 @@ services:
         token: # the part after http://hooks.slack.com/services/
 
   deck:
-    host: spin-deck.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 9000
     baseUrl: ${services.default.protocol}://${services.deck.host}:${services.deck.port}
     gateUrl: ${services.gate.baseUrl}
     bakeryUrl: ${services.bakery.baseUrl}
-    timezone: 'America/New_York'
+    timezone: 'America/Los_Angeles'
     auth:
       enabled: false
 
   front50:
-    host: spin-front50.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8080
     baseUrl: ${services.default.protocol}://${services.front50.host}:${services.front50.port}
 
   gate:
-    host: spin-gate.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8084
     baseUrl: ${services.default.protocol}://${services.gate.host}:${services.gate.port}
 
@@ -82,7 +83,7 @@ services:
     # If you are integrating Jenkins then you must also enable Spinnaker's
     # "igor" subsystem.
     enabled: false
-    host: spin-igor.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8088
     baseUrl: ${services.default.protocol}://${services.igor.host}:${services.igor.port}
 
@@ -97,7 +98,7 @@ services:
     baseUrl: ${services.clouddriver.baseUrl}
 
   orca:
-    host: spin-orca.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8083
     baseUrl: ${services.default.protocol}://${services.orca.host}:${services.orca.port}
     enabled: true
@@ -108,13 +109,13 @@ services:
     baseUrl: ${services.clouddriver.baseUrl}
 
   rosco:
-    host: spin-rosco.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8087
     baseUrl: ${services.default.protocol}://${services.rosco.host}:${services.rosco.port}
 
   rush:
     # Spinnaker's "rush" subsystem is used by the "rosco" bakery.
-    host: spin-rush.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 8085
     baseUrl: ${services.default.protocol}://${services.rush.host}:${services.rush.port}
     # You need to provide the fully-qualified path to the directory containing the packer templates.
@@ -150,12 +151,12 @@ services:
       password:  # Expected in spinnaker-local.yml
 
   redis:
-    host: data-redis-server.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 6379
     connection: redis://${services.redis.host}:${services.redis.port}
 
   cassandra:
-    host: data-cassandra.spinnaker.svc.cluster.local
+    host: ${services.default.host}
     port: 9042
     embedded: false
     cluster: CASS_SPINNAKER
@@ -182,7 +183,7 @@ providers:
     # If you want to deploy some services to Google Cloud Platform (google),
     # set enabled and provide primary credentials for deploying.
     # Enabling google is independent of other providers.
-    enabled: true
+    enabled: false
     defaultRegion: us-central1
     defaultZone: us-central1-f
     primaryCredentials:
@@ -190,8 +191,8 @@ providers:
       # The project is the Google Project ID for the project to manage with
       # Spinnaker. The jsonPath is a path to the JSON service credentials
       # downloaded from the Google Developer's Console.
-      project: nits-1132
-      jsonPath: /root/.gcp/account.json
+      project:
+      jsonPath:
   cf:
     # If you want to deploy some services to Cloud Foundry (cf),
     # set enabled and provide primary credentials for deploying.
