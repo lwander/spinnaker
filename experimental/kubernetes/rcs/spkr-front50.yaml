@@ -26,6 +26,8 @@ spec:
           volumeMounts:
             - mountPath: /opt/spinnaker/config
               name: spinnaker-config
+            - mountPath: /root/.gcp
+              name: gcp-config
           readinessProbe:
             httpGet:
               path: /env
@@ -36,3 +38,6 @@ spec:
         - name: spinnaker-config
           secret:
             secretName: spinnaker-config
+        - name: gcp-config
+          secret:
+            secretName: gcp-config

@@ -22,3 +22,7 @@ kubectl create secret generic spinnaker-config \
 kubectl create secret generic kube-config \
     --from-file=$HOME/.kube/config \
     --namespace=spinnaker
+
+kubectl create secret generic gcp-config \
+    --from-file=$HOME/.gcp/account.json \
+    --namespace=spinnaker

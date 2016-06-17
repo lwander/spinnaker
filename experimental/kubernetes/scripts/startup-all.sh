@@ -7,7 +7,6 @@ else
 fi
 
 bash scripts/startup-redis.sh
-bash scripts/startup-cassandra.sh
 
 bash scripts/startup-config.sh
 

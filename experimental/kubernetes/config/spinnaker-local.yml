@@ -148,12 +148,6 @@ services:
     port: 6379
     connection: redis://${services.redis.host}:${services.redis.port}
 
-  cassandra:
-    host: data-cassandra.spinnaker.svc.cluster.local
-    port: 9042
-    embedded: false
-    cluster: CASS_SPINNAKER
-
 providers:
   aws:
     # If you want to deploy some services to Amazon Web Services (AWS),

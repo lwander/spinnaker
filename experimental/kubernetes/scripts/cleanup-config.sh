@@ -1,5 +1,6 @@
 kubectl delete secret kube-config --namespace=spinnaker
 kubectl delete secret spinnaker-config --namespace=spinnaker
+kubectl delete secret gcp-config --namespace=spinnaker
 
 CONF_DIR=../../config/
 
