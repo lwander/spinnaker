@@ -1,0 +1,22 @@
+server:
+  port: ${services.front50.port:8080}
+  address: 0.0.0.0
+
+aws:
+  simpleDBEnabled: ${providers.aws.simpleDBEnabled:false}
+  defaultSimpleDBDomain: ${providers.aws.defaultSimpleDBDomain}
+
+cassandra:
+  enabled: false
+
+spinnaker:
+  cassandra:
+    enabled: false
+  redis:
+    enabled: false
+  gcs:
+    enabled: true
+    project: nits-1132
+    jsonPath: /root/.gcp/account.json
+    rootFolder: front50
+    bucket: spinnaker
