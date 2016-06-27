@@ -16,7 +16,7 @@ spinnaker:
     enabled: false
   gcs:
     enabled: true
-    project: nits-1132
-    jsonPath: /root/.gcp/account.json
-    rootFolder: front50
-    bucket: spinnaker
+    project: # GCP Project Name
+    jsonPath: # Full path to GCP service account
+    rootFolder: # Folder to store artifacts in (will be created if necessary)
+    bucket: # Bucket to store artifacts in (will be created if necessary)

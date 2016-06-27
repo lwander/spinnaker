@@ -5,5 +5,7 @@ kubectl delete secret gcp-config --namespace=spinnaker
 CONF_DIR=../../config/
 
 for FILENAME in $CONF_DIR*.yml; do
-    rm config/${FILENAME:${#CONF_DIR}}
+    if [ ${FILENAME:${#CONF_DIR}} != "default-spinnaker-local.yml" ]; then
+        rm config/${FILENAME:${#CONF_DIR}}
+    fi
 done

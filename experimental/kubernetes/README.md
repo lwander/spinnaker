@@ -1,9 +1,5 @@
 # Spinnaker on Kubernetes
 
-> *NOTE:* This is not intended for production use, as both Redis and Cassandra
-> are backed by memory currently, and are so far only stable in single node
-> configurations. Both of these issues should be fixed soon, however.
-
 This guide will walk you through deploying Spinnaker to a running Kubernetes 
 cluster. The steps below assume that you will be using that Spinnaker installation 
 to manage and deploy other applications to that same Kubernetes cluster. 
@@ -16,21 +12,14 @@ it first.
 This setup relies on a few Docker images that you can build yourself if you
 don't trust the ones I provide. 
 
-1. `gcr.io/google-samples/cassandra:v8` can be rebuilt from
-   [here](https://github.com/kubernetes/kubernetes/tree/master/examples/cassandra/image).
-
-2. `gcr.io/kubernetes-spinnaker/cassandra-keys:v2` can be rebuilt from
-   `./images/cassandra`.
-
-3. `gcr.io/kubernetes-spinnaker/redis-cluster:v2` can be rebuilt from
+1. `gcr.io/kubernetes-spinnaker/redis-cluster:v2` can be rebuilt from
    `./images/redis`.
 
-4. `quay.io/spinnaker/PROJECT_NAME:latest` can be rebuilt at head of
-   https://github.com/spinnaker/PROJECT_NAME
+2. `quay.io/spinnaker/SERVICE:latest` can be rebuilt at head of
+   https://github.com/spinnaker/SERVICE
 
 ## Prerequisites
-
-Make sure you have a running Kubernetes cluster, which is explained in more
+1. Make sure you have a running Kubernetes cluster, which is explained in more
 detail [here](http://www.spinnaker.io/v1.0/docs/target-deployment-setup#section-kubernetes-cluster-setup).
 The key takeaway is having a kubeconfig file sitting in `~/.kube/config` that
 can authenticate with the cluster you want to deploy Spinnaker to. 
@@ -38,13 +27,16 @@ Once that is all squared away, make sure that running `$ kubectl config
 current-context` refers to the cluster you want to have Spinnaker running in.
 (You may need to update `kubectl` for the previous command to work).
 
-Next, in the editor of your choice, open up `./config/clouddriver.yml`, and
+2. In the editor of your choice, open up `./config/clouddriver-local.yml`, and
 examine the `dockerRegistry` subsection. If you would like to add your own registry,
-update the address and `repositories` fields accordingly.
+update the address and `repositories` fields accordingly.  If you feel like 
+changing the value of `kubernetes.accounts[0].name`, make sure it's reflected in
+`./config/settings.js` under `providers.kubernetes.defaults.account` (not 
+necessary, but this way your account name is always prepopulated in the UI).
 
-If you feel like changing the value of `kubernetes.accounts[0].name`, make sure it's reflected in
-`./config/settings.js` under `providers.kubernetes.defaults.account` (this way
-your account name is always prepopulated).
+3. Open `./config/front50-local.yml`, and populate the 4 missing fields under
+the GCS subheading. This is required to provide a place to persist your
+application metadata between Spinnaker restarts and updates.
 
 ## Initial Startup
 
