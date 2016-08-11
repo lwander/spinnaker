@@ -75,7 +75,7 @@ services:
 
     # If using storage bucket persistence (gcs or s3), specify the bucket here
     # disable cassandra and enable the storage service below.
-    storage_bucket: 3jnk8wrezshp7w4n
+    storage_bucket: {%bucket%}
     bucket_root: front50
 
     cassandra:
@@ -84,7 +84,7 @@ services:
       enabled: false
     gcs:
       enabled: true
-      project: 
+      project: {%project%}
     s3:
       enabled: false # Or me
 

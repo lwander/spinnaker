@@ -21,8 +21,10 @@ kubectl create secret generic spinnaker-config \
 
 GENERIC_CREDS="--from-file=$HOME/.kube/config"
 
-if [ -f $HOME/.gcp/account.json ]; then
-    GENERIC_CREDS="$GENERIC_CREDS --from-file=$HOME/.gcp/account.json"
+PROJECT=$(gcloud info --format='value(config.project)')
+
+if [ -f $HOME/.gcp/$PROJECT/account.json ]; then
+    GENERIC_CREDS="$GENERIC_CREDS --from-file=$HOME/.gcp/$PROJECT/account.json"
 fi
 
 kubectl create secret generic creds-config \
