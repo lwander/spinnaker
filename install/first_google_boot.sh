@@ -267,9 +267,9 @@ function extract_spinnaker_gcr_credentials() {
     echo "GCR enabled"
 
     if [ -z "$gcr_account" ]; then
-      # the @developer address is reserved for the project's special service
-      # compute engine default service account.
-      gcr_account=$(gcloud iam service-accounts list --format='value(email)' | grep developer -m 1)
+      # This service account is enabled with the Compute API.
+      project_id=$(gcloud projects list --format="value(projectNumber)" --filter="projectId:$MY_PROJECT")
+      gcr_account="${project_id}-compute@developer.gserviceaccount.com"
       clear_instance_metadata "gcr_account"
     fi
 
