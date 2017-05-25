@@ -85,7 +85,7 @@ function main() {
   if contains $COMPONENT "${EXTERNAL_ARTIFACTS[@]}"; then
     service_names=($COMPONENT)
   else
-    service_names=($COMPONENT monitoring-daemon vault-client consul-client)
+    service_names=($COMPONENT consul-client vault-client)
   fi
 
   echo "Installed services chosen to be ${service_names[@]}"
