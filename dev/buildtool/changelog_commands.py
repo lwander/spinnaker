@@ -249,7 +249,7 @@ class ChangelogBuilder(object):
         clean_text = self.clean_message(first_line)
         match = one_liner.match(clean_text)
         if match:
-          text = '**{thing}:**  {message}'.format(
+          text = u'**{thing}:**  {message}'.format(
               thing=match.group(1), message=match.group(2))
         else:
           text = clean_text
