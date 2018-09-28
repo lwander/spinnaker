@@ -11,3 +11,4 @@ metadata:
 data:
   config.yaml: |
     logging: {{ .Values.logging }}
+    keys: values
