@@ -28,6 +28,12 @@ func update_config() error {
 	return nil
 }
 
+func err(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("Someone hit the error endpoint!")
+
+	http.Error(w, fmt.Sprintf("Error!"), 500)
+}
+
 func index(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Handling %+v\n", r)
 
@@ -54,6 +60,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", index)
+	http.HandleFunc("/error", err)
 
 	port := ":80"
 	fmt.Printf("Starting to service on port %s\n", port)
