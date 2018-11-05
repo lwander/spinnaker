@@ -1,0 +1,16 @@
+replicaCount: 1
+
+revisionHistoryLimit: 2
+
+environment: production
+
+canary: false
+baseline: false
+
+image: gcr.io/spinnaker-playground/demo
+
+service:
+  type: ClusterIP
+  port: 80
+
+logging: INFO
